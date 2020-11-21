@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Add Feedback{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="display-1">Add feedback</h1>
+    <form method="POST">
+        {{form.hidden_tag()}}
+        <div class="form-row">
+            <div class="col">
+                {{form.title.label}}
+                {{form.title(class_="form-control")}}
+                {% for error in form.title.errors %}
+                    <span class="form-text text-danger">{{ error }}</span>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col">
+                {{form.feedback.label}}
+                {{form.feedback(class_="form-control")}}
+                {% for error in form.feedback.errors %}
+                    <span class="form-text text-danger">{{ error }}</span>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="mt-4">
+            <a href="/users/{{session['user_username']}}" class="btn btn-danger mr-2">Cancel</a>
+            <button class="btn btn-success">Submit</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

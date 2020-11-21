@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}User{% endblock %}
+
+{% block content %}
+<div class="container text-center">
+    <h1 class="display-2">{{user.first_name}} {{user.last_name}}</h1>
+    <h3>Username: {{user.username}}</h1>
+    <h3>Email: {{user.email}}</h1>
+    <form method="POST" action="/users/{{user.username}}/delete" class="mt-4">
+        <a href="/users/{{user.username}}/feedback/add" class="btn btn-success mr-2">Add Feedback</a>
+        <button class="btn btn-danger">Delete user</button>
+    </form>
+    <div class="list-group mt-4 text-left">
+        {%for feed in feedback %}
+            <div class="list-group-item">
+                <div class="d-flex w-100">
+                    <h5 class="mb-1">{{feed.title}}</h5>
+                </div>
+                <p class="mb-1">{{feed.content}}</p>
+                <small>{{feed.username}}</small>
+                <form action="/feedback/{{feed.id}}/delete" class="mt-4" method="POST">
+                    <a href="/feedback/{{feed.id}}/update" class="btn btn-success mr-2">Edit</a>
+                    <button class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
